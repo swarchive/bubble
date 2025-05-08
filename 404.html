@@ -1,0 +1,14 @@
+<!-- public/404.html -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <script>
+        // 현재 경로를 해시 뒤로 붙이고 index.html 로 리다이렉트
+        var base = '/bubble/';  // Vite `base` 설정과 동일하게
+        var path = window.location.pathname.replace(base, '');
+        window.location.replace(base + 'index.html#/' + path + window.location.search);
+        </script>
+    </head>
+    <body></body>
+</html>
