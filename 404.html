@@ -4,10 +4,20 @@
     <head>
         <meta charset="utf-8" />
         <script>
-        // 현재 경로를 해시 뒤로 붙이고 index.html 로 리다이렉트
-        var base = '/bubble/';  // Vite `base` 설정과 동일하게
-        var path = window.location.pathname.replace(base, '');
-        window.location.replace(base + path + window.location.search);
+            ;(async function() {
+            // 1) Vite의 base 설정과 일치시킬 경로
+            const base = '/bubble/'
+            // 2) 예: '/bubble/bydates/2025-04-12' → 'bydates/2025-04-12'
+            const path = window.location.pathname.replace(base, '')
+            // 3) index.html 을 불러와 문서 전체를 덮어 쓰고
+            const resp = await fetch(base + 'index.html')
+            const html = await resp.text()
+            document.open()
+            document.write(html)
+            document.close()
+            // 4) 히스토리 API로 URL을 원래대로 바꿔 놓기
+            window.history.replaceState({}, '', base + path + window.location.search)
+        })();
         </script>
     </head>
     <body></body>
